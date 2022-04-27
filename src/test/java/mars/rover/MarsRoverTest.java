@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MarsRoverTest {
 
     @Test
-    public void
-    acceptance_test_1() {
+    void checkIfRoverIsAtTheExpectedPositionAfterFollowingGivenInstructions() {
         String newPosition = MarsRover.move(1, 2, 'N', "LMLMLMLMM");
         assertEquals("1 3 N", newPosition);
     }
