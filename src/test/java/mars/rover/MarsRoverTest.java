@@ -7,28 +7,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MarsRoverTest {
 
     @Test
-    void checkIfRoverTurnsToItsLeftOnGivingAnInstructionToTurnLeft() {
+    void shouldCheckIfRoverTurnsToItsLeftOnGivingAnInstructionToTurnLeft() {
         MarsRover marsRover = new MarsRover(1,2, 'N');
         String newPosition = marsRover.move( "L");
         assertEquals("1 2 W", newPosition);
     }
 
     @Test
-    void checkIfRoverTurnsToItsRIghtOnGivingAnInstructionToTurnRight() {
+    void shouldCheckIfRoverTurnsToItsRIghtOnGivingAnInstructionToTurnRight() {
         MarsRover marsRover = new MarsRover(1,2, 'N');
         String newPosition = marsRover.move( "R");
         assertEquals("1 2 E", newPosition);
     }
 
     @Test
-    void checkIfRoverMovesAStepForwardOnGivingAnInstructionAsMove() {
+    void shouldCheckIfRoverMovesAStepForwardOnGivingAnInstructionAsMove() {
         MarsRover marsRover = new MarsRover(1,2, 'N');
         String newPosition = marsRover.move( "M");
         assertEquals("1 3 N", newPosition);
     }
 
     @Test
-    void checkIfRoverIsAtTheExpectedPositionAfterFollowingGivenInstructions() {
+    void shouldCheckIfRoverIsAtTheExpectedPositionAfterFollowingGivenInstructions() {
         MarsRover marsRover = new MarsRover(1,2, 'N');
         String newPosition = marsRover.move( "LMLMLMLMM");
         assertEquals("1 3 N", newPosition);

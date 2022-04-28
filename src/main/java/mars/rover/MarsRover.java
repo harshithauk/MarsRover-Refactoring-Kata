@@ -28,7 +28,14 @@ public class MarsRover {
                 newPosition = findNextPosition(newPosition);
             }
         }
-        return newPosition.x + " " + newPosition.y + " " + newPosition.direction;
+        updateRoverPosition(newPosition);
+        return x + " " + y + " " + direction;
+    }
+
+    private void updateRoverPosition(MarsRover newPosition) {
+        this.x = newPosition.x;
+        this.y = newPosition.y;
+        this.direction = newPosition.direction;
     }
 
     private MarsRover findNextPosition(MarsRover newPosition) {
