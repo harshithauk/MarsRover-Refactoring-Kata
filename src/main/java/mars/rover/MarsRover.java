@@ -3,52 +3,64 @@ package mars.rover;
 
 public class MarsRover {
 
-    private final int x;
-    private final int y;
-    private final char direction;
-
+    private int x;
+    private int y;
+    private char direction;
+    private final char[] directions;
 
     public MarsRover(int x_coordinate, int y_coordinate, char direction) {
         this.x = x_coordinate;
         this.y = y_coordinate;
         this.direction = direction;
+        this.directions = new char[]{'N', 'W', 'S', 'E'};
 
     }
 
-    public static String move(int x, int y, char direction, String instructions) {
-        char newDirection = ' ';
-        char[] directions = {'N', 'W', 'S', 'E'};
+    public String move(String instructions) {
 
-        if (!instructions.isEmpty()) {
-            char instruction = instructions.charAt(0);
-            if (instruction == 'L') {
-                for (int i = 0; i < directions.length; i++) {
-                    if (directions[i] == direction) {
-                        int index = (i + 1) % directions.length;
-                        newDirection = directions[index];
-                    }
-                }
-                return move(x, y, newDirection, instructions.substring(1, instructions.length()));
-            } else if (instruction == 'R') {
-                for (int i = 0; i < directions.length; i++) {
-                    if (directions[i] == direction) {
-                        int index = (i - 1) < 0 ? directions.length - 1 : i - 1;
-                        newDirection = directions[index];
-                    }
-                }
-                return move(x, y, newDirection, instructions.substring(1, instructions.length()));
+        MarsRover newPosition = this;
+        for (int j = 0; j < instructions.length(); j++) {
+            char instruction = instructions.charAt(j);
+
+            if (instruction == 'L' || instruction == 'R') {
+                newPosition = findNewDirection(instruction, newPosition);
             } else if (instruction == 'M') {
-                if (direction == 'N') {
-                    return move(x, y + 1, 'N', instructions.substring(1, instructions.length()));
-                } else if (direction == 'S') {
-                    return move(x, y - 1, 'S', instructions.substring(1, instructions.length()));
-                } else if (direction == 'W') {
-                    return move(x - 1, y, 'W', instructions.substring(1, instructions.length()));
-                } else if (direction == 'E') {
-                    return move(x + 1, y, 'E', instructions.substring(1, instructions.length()));
+                newPosition = findNextPosition(newPosition);
+            }
+        }
+        return newPosition.x + " " + newPosition.y + " " + newPosition.direction;
+    }
+
+    private MarsRover findNextPosition(MarsRover newPosition) {
+        int[][] nextPositionAfterMove = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
+
+        for (int i = 0; i < directions.length; i++) {
+            if (directions[i] == newPosition.direction) {
+                return new MarsRover(newPosition.x + nextPositionAfterMove[i][0], newPosition.y + nextPositionAfterMove[i][1], newPosition.direction);
+            }
+        }
+        return null;
+    }
+
+    private MarsRover findNewDirection(char instruction, MarsRover newPosition) {
+        if (instruction == 'L') {
+            for (int i = 0; i < directions.length; i++) {
+                if (directions[i] == newPosition.direction) {
+                    return new MarsRover(newPosition.x, newPosition.y, directions[(i + 1) % directions.length]);
+                }
+            }
+
+        } else if (instruction == 'R') {
+
+            for (int i = 0; i < directions.length; i++) {
+                if (directions[i] == newPosition.direction) {
+                    int index = (i - 1) < 0 ? directions.length - 1 : i - 1;
+                    return new MarsRover(newPosition.x, newPosition.y, directions[index]);
                 }
             }
         }
-        return x + " " + y + " " + direction;
+        return null;
     }
+
+
 }
