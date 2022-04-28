@@ -18,6 +18,6 @@ public class Plateau {
     }
 
     public String moveRover(String instructions) {
-        return marsRover.move(instructions);
+        return marsRover.move(instructions, boundary);
     }
 }
