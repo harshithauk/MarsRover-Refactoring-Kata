@@ -38,45 +38,45 @@ public class MarsRover {
         this.direction = newPosition.direction;
     }
 
-    private MarsRover findNextPosition(MarsRover newPosition, int[] boundary) {
+    private MarsRover findNextPosition(MarsRover currentPosition, int[] boundary) {
         int[][] nextPositionAfterMove = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
 
         for (int i = 0; i < directions.length; i++) {
-            if (directions[i] == newPosition.direction) {
-                if (roverInsideBoundary(newPosition, nextPositionAfterMove[i], boundary)) {
-                    return new MarsRover(newPosition.x + nextPositionAfterMove[i][0], newPosition.y + nextPositionAfterMove[i][1], newPosition.direction);
+            if (directions[i] == currentPosition.direction) {
+                if (roverInsideBoundary(currentPosition, nextPositionAfterMove[i], boundary)) {
+                    return new MarsRover(currentPosition.x + nextPositionAfterMove[i][0], currentPosition.y + nextPositionAfterMove[i][1], currentPosition.direction);
                 }
-                return new MarsRover(newPosition.x, newPosition.y, newPosition.direction);
+                return new MarsRover(currentPosition.x, currentPosition.y, currentPosition.direction);
 
             }
         }
         return null;
     }
 
-    private boolean roverInsideBoundary(MarsRover newPosition, int[] nextPosition, int[] boundary) {
-        if (newPosition.x + nextPosition[0] > boundary[0] || newPosition.y + nextPosition[1] > boundary[1]) {
+    private boolean roverInsideBoundary(MarsRover currentPosition, int[] nextPosition, int[] boundary) {
+        if (currentPosition.x + nextPosition[0] > boundary[0] || currentPosition.y + nextPosition[1] > boundary[1]) {
             return false;
         }
-        if (newPosition.x + nextPosition[0] < 0 || newPosition.y + nextPosition[1] < 0) {
+        if (currentPosition.x + nextPosition[0] < 0 || currentPosition.y + nextPosition[1] < 0) {
             return false;
         }
         return true;
     }
 
-    private MarsRover findNewDirection(char instruction, MarsRover newPosition) {
+    private MarsRover findNewDirection(char instruction, MarsRover currentPosition) {
         if (instruction == 'L') {
             for (int i = 0; i < directions.length; i++) {
-                if (directions[i] == newPosition.direction) {
-                    return new MarsRover(newPosition.x, newPosition.y, directions[(i + 1) % directions.length]);
+                if (directions[i] == currentPosition.direction) {
+                    return new MarsRover(currentPosition.x, currentPosition.y, directions[(i + 1) % directions.length]);
                 }
             }
 
         } else if (instruction == 'R') {
 
             for (int i = 0; i < directions.length; i++) {
-                if (directions[i] == newPosition.direction) {
+                if (directions[i] == currentPosition.direction) {
                     int index = (i - 1) < 0 ? directions.length - 1 : i - 1;
-                    return new MarsRover(newPosition.x, newPosition.y, directions[index]);
+                    return new MarsRover(currentPosition.x, currentPosition.y, directions[index]);
                 }
             }
         }

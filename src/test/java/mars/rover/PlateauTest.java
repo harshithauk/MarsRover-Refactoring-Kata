@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlateauTest {
     @Test
-    void shouldNotCreateAPlateauForInvalidBoundaries() throws InvalidBoundariesException {
+    void shouldNotCreateAPlateauForInvalidBoundaries() {
         assertThrows(InvalidBoundariesException.class, () -> new Plateau(-1, 5));
     }
 
@@ -21,11 +21,11 @@ public class PlateauTest {
     }
 
     @Test
-    void shouldCheckThatRoverShouldNotGoOutOfPlateau() throws InvalidBoundariesException {
+    void shouldCheckThatRoverDoesNotGoOutOfPlateau() throws InvalidBoundariesException {
         Plateau plateau = new Plateau(3, 3);
         plateau.landRover(1, 2, 'N');
         String newPosition = plateau.moveRover("MMLM");
-        assertEquals("0 3 W",newPosition);
+        assertEquals("0 3 W", newPosition);
 
     }
 }
