@@ -3,21 +3,23 @@ package mars.rover;
 import mars.rover.exceptions.InvalidBoundariesException;
 
 public class Plateau {
-    private final int[] boundary;
+    private final Position boundary;
     MarsRover marsRover;
 
-    public Plateau(int x, int y) throws InvalidBoundariesException {
+    public Plateau(int x, int y, MarsRover marsRover) throws InvalidBoundariesException {
         if (x <= 0 || y <= 0) {
             throw new InvalidBoundariesException();
         }
-        boundary = new int[]{x, y};
+        boundary = new Position(x, y);
+        this.marsRover = marsRover;
     }
 
-    public void landRover(int x, int y, char direction) {
+    public void landRover(int x, int y, Direction direction) {
         marsRover = new MarsRover(x, y, direction);
     }
 
     public String moveRover(String instructions) {
-        return marsRover.move(instructions, boundary);
+        marsRover = marsRover.move(instructions, boundary);
+        return marsRover.getPositionDetails();
     }
 }

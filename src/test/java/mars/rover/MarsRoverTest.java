@@ -1,5 +1,6 @@
 package mars.rover;
 
+import mars.rover.exceptions.InvalidBoundariesException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,30 +8,32 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MarsRoverTest {
 
     @Test
-    void shouldCheckIfRoverTurnsToItsLeftOnGivingAnInstructionToTurnLeft() {
-        MarsRover marsRover = new MarsRover(1, 2, 'N');
-        String newPosition = marsRover.move("L", new int[]{5, 5});
+    void shouldCheckIfRoverTurnsToItsLeftOnGivingAnInstructionToTurnLeft() throws InvalidBoundariesException {
+        Plateau plateau = new Plateau(5, 5, new MarsRover(1, 2, Direction.N));
+        String newPosition = plateau.moveRover("L");
         assertEquals("1 2 W", newPosition);
     }
 
+
     @Test
-    void shouldCheckIfRoverTurnsToItsRIghtOnGivingAnInstructionToTurnRight() {
-        MarsRover marsRover = new MarsRover(1, 2, 'N');
-        String newPosition = marsRover.move("R", new int[]{5, 5});
+    void shouldCheckIfRoverTurnsToItsRightOnGivingAnInstructionToTurnRight() throws InvalidBoundariesException {
+        Plateau plateau = new Plateau(5, 5, new MarsRover(1, 2, Direction.N));
+        String newPosition = plateau.moveRover("R");
         assertEquals("1 2 E", newPosition);
+
     }
 
     @Test
-    void shouldCheckIfRoverMovesAStepForwardOnGivingAnInstructionAsMove() {
-        MarsRover marsRover = new MarsRover(1, 2, 'N');
-        String newPosition = marsRover.move("M", new int[]{5, 5});
+    void shouldCheckIfRoverMovesAStepForwardOnGivingAnInstructionAsMove() throws InvalidBoundariesException {
+        Plateau plateau = new Plateau(5, 5, new MarsRover(1, 2, Direction.N));
+        String newPosition = plateau.moveRover("M");
         assertEquals("1 3 N", newPosition);
     }
 
     @Test
-    void shouldCheckIfRoverIsAtTheExpectedPositionAfterFollowingGivenInstructions() {
-        MarsRover marsRover = new MarsRover(1, 2, 'N');
-        String newPosition = marsRover.move("LMLMLMLMM", new int[]{5, 5});
+    void shouldCheckIfRoverIsAtTheExpectedPositionAfterFollowingGivenInstructions() throws InvalidBoundariesException {
+        Plateau plateau = new Plateau(5, 5, new MarsRover(1, 2, Direction.N));
+        String newPosition = plateau.moveRover("LMLMLMLMM");
         assertEquals("1 3 N", newPosition);
     }
 
