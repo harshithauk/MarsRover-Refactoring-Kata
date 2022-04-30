@@ -34,16 +34,10 @@ public class MarsRover {
         int newXPosition = currentPosition.x + newPosition.getX();
         int newYPosition = currentPosition.y + newPosition.getY();
 
-        if (roverInsideBoundary(currentPosition, newPosition, boundary)) {
+        if (boundary.checkIfRoverInsideBoundary(newXPosition, newYPosition)) {
             return new MarsRover(newXPosition, newYPosition, currentPosition.direction);
         }
         return currentPosition;
-    }
-
-    private boolean roverInsideBoundary(MarsRover currentPosition, Position nextPosition, Position boundary) {
-        int newXPosition = currentPosition.x + nextPosition.getX();
-        int newYPosition = currentPosition.y + nextPosition.getY();
-        return boundary.checkIfRoverInsideBoundary(newXPosition, newYPosition);
     }
 
     private MarsRover findNewDirection(char instruction, MarsRover currentPosition) {
