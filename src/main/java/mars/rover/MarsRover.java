@@ -41,34 +41,14 @@ public class MarsRover {
     }
 
     private MarsRover findNewDirection(char instruction, MarsRover currentPosition) {
-        Direction newDirection = null;
-        Direction[] values = Direction.values();
+        Direction newDirection;
 
         if (instruction == 'L') {
-            for (int index = 0; index < values.length; index++) {
-                if (values[index] == currentPosition.direction) {
-                    newDirection = values[this.findNextDirection(values.length, index)];
-                    break;
-                }
-            }
+            newDirection = currentPosition.direction.getNextLeftDirection();
         } else {
-            for (int index = 0; index < values.length; index++) {
-                if (values[index] == currentPosition.direction) {
-                    newDirection = findPreviousDirection(values, index);
-                    break;
-                }
-            }
+            newDirection = currentPosition.direction.getNextRightDirection();
         }
         return new MarsRover(currentPosition.x, currentPosition.y, newDirection);
-
-    }
-
-    private int findNextDirection(int totalLength, int currentIndex) {
-        return currentIndex + 1 >= totalLength ? 0 : currentIndex + 1;
-    }
-
-    private Direction findPreviousDirection(Direction[] values, int index) {
-        return index - 1 < 0 ? values[values.length - 1] : values[index - 1];
     }
 
     public String getPositionDetails() {

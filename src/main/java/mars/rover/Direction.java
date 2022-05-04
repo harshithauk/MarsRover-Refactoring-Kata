@@ -1,10 +1,50 @@
 package mars.rover;
 
 public enum Direction {
-    N(new Position(0, 1)),
-    W(new Position(-1, 0)),
-    S(new Position(0, -1)),
-    E(new Position(1, 0));
+    N( new Position(0, 1)){
+        @Override
+        public Direction getNextLeftDirection(){
+            return Direction.W;
+        }
+
+        @Override
+        public Direction getNextRightDirection(){
+            return Direction.E;
+        }
+    },
+    W( new Position(-1, 0)){
+        @Override
+        public Direction getNextLeftDirection(){
+            return Direction.S;
+        }
+
+        @Override
+        public Direction getNextRightDirection(){
+            return Direction.N;
+        }
+    },
+    S( new Position(0, -1)){
+        @Override
+        public Direction getNextLeftDirection(){
+            return Direction.E;
+        }
+
+        @Override
+        public Direction getNextRightDirection(){
+            return Direction.W;
+        }
+    },
+    E( new Position(1, 0)){
+        @Override
+        public Direction getNextLeftDirection(){
+            return Direction.N;
+        }
+
+        @Override
+        public Direction getNextRightDirection(){
+            return Direction.S;
+        }
+    };
 
 
     private final Position position;
@@ -17,4 +57,11 @@ public enum Direction {
         return position;
     }
 
+    public Direction getNextLeftDirection(){
+        return  Direction.N;
+    }
+
+    public Direction getNextRightDirection(){
+        return  Direction.S;
+    }
 }

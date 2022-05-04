@@ -14,12 +14,11 @@ class MarsRoverTest {
         assertEquals("1 2 W", newPosition);
     }
 
-
     @Test
     void shouldCheckIfRoverTurnsToItsRightOnGivingAnInstructionToTurnRight() throws InvalidBoundariesException {
-        Plateau plateau = new Plateau(5, 5, new MarsRover(1, 2, Direction.N));
+        Plateau plateau = new Plateau(5, 5, new MarsRover(1, 2, Direction.S));
         String newPosition = plateau.moveRover("R");
-        assertEquals("1 2 E", newPosition);
+        assertEquals("1 2 W", newPosition);
 
     }
 
