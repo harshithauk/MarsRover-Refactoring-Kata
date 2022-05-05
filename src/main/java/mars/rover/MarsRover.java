@@ -1,12 +1,9 @@
 package mars.rover;
 
-
 public class MarsRover {
-
     private final int x;
     private final int y;
     private final Direction direction;
-
 
     public MarsRover(int x_coordinate, int y_coordinate, Direction direction) {
         this.x = x_coordinate;
@@ -19,7 +16,6 @@ public class MarsRover {
         MarsRover newPosition = this;
         for (int j = 0; j < instructions.length(); j++) {
             char instruction = instructions.charAt(j);
-
             if (instruction == 'L' || instruction == 'R') {
                 newPosition = findNewDirection(instruction, newPosition);
             } else if (instruction == 'M') {
@@ -41,13 +37,7 @@ public class MarsRover {
     }
 
     private MarsRover findNewDirection(char instruction, MarsRover currentPosition) {
-        Direction newDirection;
-
-        if (instruction == 'L') {
-            newDirection = currentPosition.direction.getNextLeftDirection();
-        } else {
-            newDirection = currentPosition.direction.getNextRightDirection();
-        }
+        Direction newDirection = instruction == 'L' ? currentPosition.direction.getNextLeftDirection() : currentPosition.direction.getNextRightDirection();
         return new MarsRover(currentPosition.x, currentPosition.y, newDirection);
     }
 

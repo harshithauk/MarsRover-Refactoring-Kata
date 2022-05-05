@@ -9,7 +9,6 @@ public class Position {
         this.y = y;
     }
 
-
     public boolean checkIfRoverInsideBoundary(int xPosition, int yPosition) {
         return (xPosition <= x && yPosition <= y && xPosition >= 0 && yPosition >= 0);
     }

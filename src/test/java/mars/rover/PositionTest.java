@@ -16,4 +16,6 @@ public class PositionTest {
         String newPosition = plateau.moveRover("MMLMML");
         assertEquals("3 3 W", newPosition);
     }
+
+
 }
