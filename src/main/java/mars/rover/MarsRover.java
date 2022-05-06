@@ -1,5 +1,7 @@
 package mars.rover;
 
+import mars.rover.exceptions.InvalidBoundariesException;
+
 public class MarsRover {
     private final int x;
     private final int y;
@@ -11,8 +13,10 @@ public class MarsRover {
         this.direction = direction;
     }
 
-    public MarsRover move(String instructions, Position boundary) {
-
+    public MarsRover move(String instructions, Position boundary) throws InvalidBoundariesException {
+        if (boundary.getX() <= 0 || boundary.getY() <= 0) {
+            throw new InvalidBoundariesException();
+        }
         MarsRover newPosition = this;
         for (int j = 0; j < instructions.length(); j++) {
             char instruction = instructions.charAt(j);
@@ -37,7 +41,7 @@ public class MarsRover {
     }
 
     private MarsRover findNewDirection(char instruction, MarsRover currentPosition) {
-        Direction newDirection = instruction == 'L' ? currentPosition.direction.getNextLeftDirection() : currentPosition.direction.getNextRightDirection();
+        Direction newDirection = (instruction == 'L') ? currentPosition.direction.getNextLeftDirection() : currentPosition.direction.getNextRightDirection();
         return new MarsRover(currentPosition.x, currentPosition.y, newDirection);
     }
 

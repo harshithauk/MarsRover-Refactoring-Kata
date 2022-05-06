@@ -4,6 +4,7 @@ import mars.rover.exceptions.InvalidBoundariesException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MarsRoverTest {
 
@@ -36,4 +37,9 @@ class MarsRoverTest {
         assertEquals("1 3 N", newPosition);
     }
 
+    @Test
+    void shouldNotMoveTheRoverIfBoundaryIsInvalid(){
+        MarsRover marsRover = new MarsRover(1, 2, Direction.N);
+        assertThrows(InvalidBoundariesException.class,()->marsRover.move("M",new Position(-1,2)));
+    }
 }

@@ -18,7 +18,7 @@ public class Plateau {
         marsRover = new MarsRover(x, y, direction);
     }
 
-    public String moveRover(String instructions) {
+    public String moveRover(String instructions) throws InvalidBoundariesException {
         marsRover = marsRover.move(instructions, boundary);
         return marsRover.getPositionDetails();
     }
