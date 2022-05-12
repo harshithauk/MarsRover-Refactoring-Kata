@@ -30,12 +30,10 @@ public class MarsRover {
     }
 
     private MarsRover findNextPosition(MarsRover currentPosition, Position boundary) {
-        Position newPosition = currentPosition.direction.getNextPosition();
-        int newXPosition = currentPosition.x + newPosition.getX();
-        int newYPosition = currentPosition.y + newPosition.getY();
-
-        if (boundary.checkIfRoverInsideBoundary(newXPosition, newYPosition)) {
-            return new MarsRover(newXPosition, newYPosition, currentPosition.direction);
+        Position bufferPosition = currentPosition.direction.getBufferPosition();
+        Position newRoverPosition = new Position(currentPosition.x + bufferPosition.getX(),currentPosition.y + bufferPosition.getY());
+        if (boundary.checkIfPositionInsideBoundary(newRoverPosition)) {
+            return new MarsRover(newRoverPosition.getX(), newRoverPosition.getY(), currentPosition.direction);
         }
         return currentPosition;
     }

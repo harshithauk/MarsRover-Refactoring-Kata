@@ -1,17 +1,10 @@
 package mars.rover;
 
-import mars.rover.exceptions.InvalidBoundariesException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DirectionTest {
-    @Test
-    void shouldCheckIfNextPositionValueOfRoverIsCorrect() throws InvalidBoundariesException {
-        Plateau plateau = new Plateau(5, 5, new MarsRover(1, 2, Direction.N));
-        String newPosition = plateau.moveRover("M");
-        assertEquals("1 3 N", newPosition);
-    }
 
     @Test
     void shouldCheckIfEastDirectionIsToTheRightOfNorthDirection() {

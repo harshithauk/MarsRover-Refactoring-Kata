@@ -44,8 +44,8 @@ public enum Direction {
         public Direction getNextRightDirection() {
             return Direction.S;
         }
-    };
 
+    };
 
     private final Position position;
 
@@ -53,7 +53,7 @@ public enum Direction {
         this.position = nextPosition;
     }
 
-    public Position getNextPosition() {
+    public Position getBufferPosition() {
         return position;
     }
 
@@ -64,4 +64,5 @@ public enum Direction {
     public Direction getNextRightDirection() {
         return this;
     }
+
 }

@@ -4,7 +4,7 @@ import mars.rover.exceptions.InvalidBoundariesException;
 
 public class Plateau {
     private final Position boundary;
-    MarsRover marsRover;
+    private MarsRover marsRover;
 
     public Plateau(int x, int y, MarsRover marsRover) throws InvalidBoundariesException {
         if (x <= 0 || y <= 0) {
@@ -14,12 +14,8 @@ public class Plateau {
         this.marsRover = marsRover;
     }
 
-    public void landRover(int x, int y, Direction direction) {
-        marsRover = new MarsRover(x, y, direction);
-    }
-
-    public String moveRover(String instructions) throws InvalidBoundariesException {
+    public MarsRover moveRover(String instructions) throws InvalidBoundariesException {
         marsRover = marsRover.move(instructions, boundary);
-        return marsRover.getPositionDetails();
+        return marsRover;
     }
 }
